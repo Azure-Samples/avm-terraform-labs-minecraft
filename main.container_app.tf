@@ -34,7 +34,7 @@ module "container_app" {
           },
           {
             name  = "VERSION"
-            value = "1.21.4"
+            value = "1.21.7"
           },
           {
             name  = "VIEW_DISTANCE"
