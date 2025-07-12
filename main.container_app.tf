@@ -12,6 +12,7 @@ module "container_app" {
 
   template = {
     max_replicas = 1
+    min_replicas = 1
     containers = [
       {
         name   = "minecraft-server"
