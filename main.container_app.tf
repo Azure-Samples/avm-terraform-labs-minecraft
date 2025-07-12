@@ -1,6 +1,6 @@
 module "container_app" {
   source  = "Azure/avm-res-app-containerapp/azurerm"
-  version = "0.3.0"
+  version = "0.6.0"
   count   = var.create_container_app ? 1 : 0
 
   container_app_environment_resource_id = module.managed_environment.resource_id
