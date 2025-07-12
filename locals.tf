@@ -14,7 +14,7 @@ locals {
   ]
 
   region_index = var.lab_instance_id % length(local.locations)
-  location = local.locations[region_index]
+  location = local.locations[local.region_index]
 }
 
 module "subnet_address_prefixes" {
