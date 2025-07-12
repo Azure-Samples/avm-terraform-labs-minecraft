@@ -9,8 +9,12 @@ locals {
     "japaneast",
     "canadacentral",
     "centralus",
+    "northeurope",
+    "eastus",
   ]
-  location = local.locations[random_integer.region_index.result]
+
+  region_index = var.lab_instance_id % length(local.locations)
+  location = local.locations[region_index]
 }
 
 module "subnet_address_prefixes" {
