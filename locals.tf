@@ -14,16 +14,16 @@ locals {
   ]
 
   region_index = var.lab_instance_id % length(local.locations)
-  location = local.locations[local.region_index]
+  location     = local.locations[local.region_index]
 }
 
 module "subnet_address_prefixes" {
-  source  = "Azure/avm-utl-network-ip-addresses/azurerm"
-  version = "0.1.0"
+  source        = "Azure/avm-utl-network-ip-addresses/azurerm"
+  version       = "0.1.0"
   address_space = var.virtual_network_address_space
   address_prefixes = {
-    firewall = 24
-    app      = 23
+    firewall         = 24
+    app              = 23
     private_endpoint = 24
   }
 }

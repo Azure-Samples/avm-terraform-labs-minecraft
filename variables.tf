@@ -9,3 +9,9 @@ variable "lab_instance_id" {
   type        = number
   default     = 0
 }
+
+variable "create_container_app" {
+  description = "Flag to create the container app."
+  type        = bool
+  default     = false
+}

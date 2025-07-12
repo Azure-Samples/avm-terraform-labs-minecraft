@@ -1,5 +1,5 @@
 locals {
-  firewall_ip  = cidrhost(local.subnet_address_prefixes.firewall, 4)
+  firewall_ip = cidrhost(local.subnet_address_prefixes.firewall, 4)
 }
 
 module "virtual_network" {
