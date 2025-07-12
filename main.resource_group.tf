@@ -7,7 +7,7 @@ resource "random_pet" "resource_group_name" {
 # The resource group
 module "resource_group" {
   source   = "Azure/avm-res-resources-resourcegroup/azurerm"
-  version  = "0.2.0"
+  version  = "0.2.1"
   location = local.location
   name     = random_pet.resource_group_name.id
 }

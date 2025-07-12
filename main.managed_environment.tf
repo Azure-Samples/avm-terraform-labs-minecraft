@@ -5,7 +5,7 @@ resource "random_id" "managed_environment" {
 
 module "managed_environment" {
   source              = "Azure/avm-res-app-managedenvironment/azurerm"
-  version             = "0.2.1"
+  version             = "0.3.0"
   name                = random_id.managed_environment.hex
   resource_group_name = module.resource_group.name
   location            = local.location

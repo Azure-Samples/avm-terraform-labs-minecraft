@@ -1,13 +1,12 @@
 locals {
-  firewall_subnet_cidr = "192.168.0.0/24"
-  firewall_ip          = cidrhost(local.firewall_subnet_cidr, 4)
+  firewall_ip  = cidrhost(local.subnet_address_prefixes.firewall, 4)
 }
 
 module "virtual_network" {
   source        = "Azure/avm-res-network-virtualnetwork/azurerm"
-  version       = "0.8.1"
+  version       = "0.9.2"
   location      = local.location
-  address_space = ["192.168.0.0/16"]
+  address_space = [var.virtual_network_address_space]
   name          = "vnet-minecraft"
   dns_servers = {
     dns_servers = [local.firewall_ip]
@@ -16,12 +15,12 @@ module "virtual_network" {
   subnets = {
     firewall = {
       name             = "AzureFirewallSubnet"
-      address_prefixes = [local.firewall_subnet_cidr]
+      address_prefixes = [local.subnet_address_prefixes.firewall]
       name             = "AzureFirewallSubnet"
     }
     app = {
       name                            = "app"
-      address_prefixes                = ["192.168.4.0/23"]
+      address_prefixes                = [local.subnet_address_prefixes.app]
       default_outbound_access_enabled = false
       route_table = {
         id = module.route_table.resource_id
@@ -37,7 +36,7 @@ module "virtual_network" {
     }
     private_endpoint = {
       name                                          = "private-endpoint"
-      address_prefixes                              = ["192.168.2.0/24"]
+      address_prefixes                              = [local.subnet_address_prefixes.private_endpoint]
       default_outbound_access_enabled               = false
       private_link_service_network_policies_enabled = true
       route_table = {
@@ -49,7 +48,7 @@ module "virtual_network" {
 
 module "route_table" {
   source              = "Azure/avm-res-network-routetable/azurerm"
-  version             = "0.3.1"
+  version             = "0.4.1"
   name                = "rt-tofirewall"
   resource_group_name = module.resource_group.name
   location            = local.location

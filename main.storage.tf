@@ -6,9 +6,10 @@ resource "random_id" "storage" {
 data "http" "ipify" {
   url = "https://api4.ipify.org/"
 }
+
 module "storage" {
   source                    = "Azure/avm-res-storage-storageaccount/azurerm"
-  version                   = "0.4.0"
+  version                   = "0.6.3"
   location                  = local.location
   resource_group_name       = module.resource_group.name
   name                      = random_id.storage.hex

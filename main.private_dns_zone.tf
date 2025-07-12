@@ -9,7 +9,7 @@ locals {
 module "private_dns_zone" {
   for_each            = local.private_dns_zones
   source              = "Azure/avm-res-network-privatednszone/azurerm"
-  version             = "0.2.2"
+  version             = "0.3.5"
   resource_group_name = module.resource_group.name
   domain_name         = each.value.domain_name
   virtual_network_links = {
